@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+	
   def index
     @projects = Project.all
   end
@@ -13,6 +14,11 @@ class ProjectsController < ApplicationController
   
   def create
     @project = Project.new(params[:project])
+    
+    puts "projects create"
+    client = Twitter::Client.new
+    client.update("Check it! - I just posted a status update via the Twitter Ruby Gem!")
+    
     if @project.save
       flash[:notice] = "Successfully created project."
       redirect_to @project
