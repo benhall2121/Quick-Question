@@ -11,15 +11,11 @@ class ProjectsController < ApplicationController
   end
   
   def new
-    @project = Project.new
+    @project = Project.new(:user_id => current_user.id)
   end
   
   def create
-    @project = Project.new(params[:project])
-    
-    puts "projects create"
-    client = Twitter::Client.new
-    client.update("Check it! - I just posted a status update via the Twitter Ruby Gem!")
+   @project = Project.new(params[:project])
     
     if @project.save
       flash[:notice] = "Successfully created project."
@@ -48,5 +44,17 @@ class ProjectsController < ApplicationController
     @project.destroy
     flash[:notice] = "Successfully destroyed project."
     redirect_to projects_url
+  end
+  
+  def send_question
+    @project = current_user.projects.find(params[:id])
+    if @project
+    	 @tasks = @project.tasks.find(:all)  
+    	 tweet = @project.name
+    	 @tasks.each do |t|
+    	 	 tweet += ' ' + t.name + ' ' + 'http://http://quickquestion.benerino.com/updateQuestionHistory/' + t.project_id + '/' + t.id
+ 	 end
+    	 current_user.twitter.update(tweet)   
+    end
   end
 end

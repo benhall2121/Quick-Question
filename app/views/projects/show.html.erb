@@ -13,5 +13,5 @@
 
 <p>
   <%= link_to "New Task", new_task_path(:project_id => @project) %> |
-  <%= link_to "View All Projects", projects_path %>
+  <%= link_to "View All Projects", projects_path %> | <%= link_to "Send Question", sendQuestion_path(:id => @project) %>
 </p>
