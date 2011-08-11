@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
     	 @tasks = @project.tasks.find(:all)  
     	 tweet = @project.name
     	 @tasks.each do |t|
-    	 	 tweet += ' ' + t.name + ' ' + 'http://http://quickquestion.benerino.com/updateQuestionHistory/' + t.project_id + '/' + t.id
+    	 	 tweet += ' ' + t.name + ' ' + 'http://http://quickquestion.benerino.com/updateQuestionHistory/' + t.project_id.to_s + '/' + t.id.to_s
  	 end
     	 current_user.twitter.update(tweet)   
     end
