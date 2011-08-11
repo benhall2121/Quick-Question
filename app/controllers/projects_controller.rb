@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
-	
+  require "rubygems"
+  require "twitter"
+
   def index
     @projects = Project.all
   end
