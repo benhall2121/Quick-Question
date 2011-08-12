@@ -1,17 +1,39 @@
-<% title @project.name %>
+<%= hidden_field_tag 'question_name', @project.name %>
 
-<h2>Tasks</h2>
+<h2><%= @project.name %> Answers</h2>
+  <% if !current_user || current_user.id != @project.user_id %>
+    VOTE by clicking your answer!<br />
+  <% end %>
 <ul>
+  
   <% for task in @project.tasks %>
     <li>
+    <% if !current_user || current_user.id != @project.user_id %>
+    <%= link_to task.name, updateQuestionHistory_path(:project_id => @project.id, :task_id => task.id) %>
+    <% else %>
       <%= task.name %>
+    <% end %>
+      <% if current_user && @project.user_id == current_user.id %>
       (<%= link_to "Edit", edit_task_path(task) %> |
       <%= link_to "Destroy", task, :confirm => "Are you sure?", :method => :delete %>)
+      <% end %>
     </li>
   <% end %>
 </ul>
 
+
+<% if current_user && @project.user_id == current_user.id %>
 <p>
-  <%= link_to "New Task", new_task_path(:project_id => @project) %> |
-  <%= link_to "View All Projects", projects_path %> | <%= link_to "Send Question", sendQuestion_path(:id => @project) %>
+  <%= link_to "New Answer", new_task_path(:project_id => @project) %> |
+  <%= link_to "Send Question", sendQuestion_path(:id => @project) %>
 </p>
+<% end %>
+
+<% if !@histories.empty? %>
+
+<%= hidden_field_tag 'histories_array', make_array(@histories) %>
+<div id="user_graph"></div>
+
+<% else %>
+ No Replies yet! Relax
+<% end %>

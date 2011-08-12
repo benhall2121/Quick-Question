@@ -1,4 +1,10 @@
-<% title "New Task" %>
+Question: <%= @task.project.name %><br />
 
+Answers:
+<ul>
+<% @task.project.tasks.each do |a| %>
+<li><%= a.name %></li>
+<% end %>
+</ul>
 <%= render 'form' %>
 

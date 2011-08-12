@@ -2,12 +2,14 @@
   <%= f.hidden_field :project_id %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :name %><br />
+    <%= f.label 'New Answer: ' %>
     <%= f.text_field :name %>
   </p>
+<!--
   <p>
-    <%= f.label :completed_at %><br />
-    <%= f.date_select :completed_at %>
+    <%= f.label 'Hash Tag' %><br />
+    <%= f.date_select :hash_tag %>
   </p>
-  <p><%= f.submit %></p>
+-->
+  <p><%= f.submit 'Create Answer' %></p>
 <% end %>

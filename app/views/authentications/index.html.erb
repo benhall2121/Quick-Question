@@ -24,6 +24,11 @@
   <%= image_tag "twitter_64.png", :size => "64x64", :alt => "Twitter" %>
   Twitter
 </a>
+<span class='auth_provider'>
+  <%= image_tag "facebook_64_Gray.png", :size => "64x64", :alt => "Facebook" %>
+  Facebook
+</span>
+<!--
 <a href="/auth/facebook" class="auth_provider">
   <%= image_tag "facebook_64.png", :size => "64x64", :alt => "Facebook" %>
   Facebook
@@ -36,8 +41,9 @@
   <%= image_tag "open_id_64.png", :size => "64x64", :alt => "OpenID" %>
   OpenID
 </a>
+-->
 <div class="clear"></div>
-
+<!--
 <% unless user_signed_in? %>
   <p>
     <strong>Don't use these services?</strong>
@@ -45,3 +51,4 @@
     <%= link_to "sign in", new_user_session_path %> with a password.
   </p>
 <% end %>
+-->

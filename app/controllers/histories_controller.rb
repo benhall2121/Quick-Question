@@ -84,5 +84,9 @@ class HistoriesController < ApplicationController
   def updateQuestionHistory
     @history = History.new(:project_id => params[:project_id], :task_id => params[:task_id])
     @history.save
+    
+    @project = Project.find(params[:project_id])
+    
+    redirect_to(@project)
   end
 end
