@@ -82,10 +82,12 @@ class HistoriesController < ApplicationController
   end
   
   def updateQuestionHistory
-    @history = History.new(:project_id => params[:project_id], :task_id => params[:task_id])
-    @history.save
-    
     @project = Project.find(params[:project_id])
+    @history = History.new(:project_id => params[:project_id], :task_id => params[:task_id])
+    if @project.updated_at < Time.now-30.seconds
+    	    puts "in"
+     @history.save
+    end
     
     redirect_to(@project)
   end
