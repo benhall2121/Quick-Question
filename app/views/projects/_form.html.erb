@@ -3,7 +3,7 @@
   <%= f.hidden_field :user_id %>
   <p>
     <%= f.label 'Question' %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :id => 'question_input' %>
   </p>
   <p><%= f.submit %></p>
 <% end %>

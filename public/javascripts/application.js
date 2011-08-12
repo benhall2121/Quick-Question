@@ -14,6 +14,22 @@ $(document).ready(function(){
        	   
        	   user_graph(history_array);
        });
+      
+      $('#question_input').keyup(function(){
+      	if($(this).val().length > 140){		      
+      	  text = $(this).val().substring(0, 140);
+          $(this).val(text);
+          alert("Questions can only be 140 characters for now. sorry");
+        }
+      });
+      
+      $('#answer_input').keyup(function(){
+      	if($(this).val().length > 100){		      
+      	  text = $(this).val().substring(0, 100);
+          $(this).val(text);
+          alert("Answers can only be 100 characters for now. sorry");
+        }
+      });
 });
 
 function user_graph(graph_array){
