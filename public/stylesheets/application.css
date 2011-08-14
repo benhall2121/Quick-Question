@@ -153,6 +153,10 @@ a {
  font-size:12px;	
 }
 
+.sign_in_with_all_div a{
+ text-decoration:none;	
+}
+
 .footer{
  text-align:center;	
 }

@@ -54,17 +54,45 @@ class ProjectsController < ApplicationController
   def send_question
     @project = current_user.projects.find(params[:id])
     if @project
-    	 @tasks = @project.tasks.find(:all) 
-    	 tweet = Array.new
-    	 tweet.push @project.name
+        @tasks = @project.tasks.find(:all) 
+        use_twitter = current_user.authentications.find_by_provider('twitter')
+        use_facebook = current_user.authentications.find_by_provider('facebook')
+        
+    	sent_to = '' 
     	
-    	 @tasks.each do |t|
-    	   tweet.push ' ' + t.name + ' ' + 'http://qq.benerino.com/uqh/' + t.project_id.to_s + '/' + t.id.to_s
- 	 end
+        if use_twitter
+          sent_to = 'Twitter'	
+    	  tweet = Array.new
+    	  tweet.push @project.name
+    	
+    	  @tasks.each do |t|
+    	    tweet.push ' ' + t.name + ' ' + 'http://qq.benerino.com/uqh/' + t.project_id.to_s + '/' + t.id.to_s
+ 	  end
  	 
- 	 tweet.each do |st|
-    	   current_user.twitter.update(st)   
-   	 end
+ 	  tweet.each do |st|
+    	    current_user.twitter.update(st)   
+   	  end
+  	end
+  	
+        if use_facebook
+          sent_to += ' & ' if sent_to != ''	
+          sent_to += 'Facebook'	
+    	  
+    	  face = @project.name
+    	
+    	  @tasks.each do |t|
+    	    face += '<br />' + t.name + ' ' + 'http://qq.benerino.com/uqh/' + t.project_id.to_s + '/' + t.id.to_s
+ 	  end
+ 	 
+ 	  current_user.facebook.feed!(:message => @project.name, :name => face)
+  	end
     end
+    
+    if sent_to != ''
+      flash[:notice] = "Question sent to: " + sent_to
+    else
+      flash[:notice] = "Question did not send. Are you signed in with twitter or facebook?"
+    end	    
+    redirect_to @project
   end
 end

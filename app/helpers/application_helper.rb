@@ -8,5 +8,10 @@ module ApplicationHelper
     
     return inin
   end	
+  
+  def signed_in_with(provider)
+    auth = current_user.authentications.find_by_provider(provider)
+    return auth	  
+  end
 
 end

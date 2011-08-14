@@ -1,0 +1,29 @@
+<% if user_signed_in? %>
+Signed in as <%= current_user.email %> :: Not you? <%= link_to "Sign out", destroy_user_session_path %> 
+<br />
+Add another service to sign in with:
+<% if !signed_in_with('twitter') %>
+  <a href="/auth/twitter">
+    <%= image_tag "twitter_32.png", :alt => "Twitter" %>
+  </a>
+<% else %>  
+  <%= image_tag "twitter_32_Gray.png", :alt => "Twitter" %>
+<% end %>
+<% if !signed_in_with('facebook') %>
+  <a href="/auth/facebook">
+    <%= image_tag "facebook_32.png", :alt => "Facebook" %>
+  </a>
+<% else %>  
+  <%= image_tag "facebook_32_Gray.png", :alt => "Twitter" %>
+<% end %>
+
+<% else %>
+Sign In With:
+  <a href="/auth/twitter">
+    <%= image_tag "twitter_32.png", :alt => "Twitter" %>
+  </a>
+  <a href="/auth/facebook">
+    <%= image_tag "facebook_32.png", :alt => "Facebook" %>
+  </a>
+<% end %>
+
