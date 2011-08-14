@@ -47,7 +47,7 @@ function user_graph(graph_array){
         
         for(i=0; i < graph_array.length; i++){
          var myString = graph_array[i].split(",");
-         data.setValue(i, 0, myString[0].replace("&&&", " "));
+         data.setValue(i, 0, myString[0].replace(/&&&/g, " "));
          data.setValue(i, 1, parseInt(myString[1]));
         }
 
