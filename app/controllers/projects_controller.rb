@@ -81,10 +81,10 @@ class ProjectsController < ApplicationController
     	  face = @project.name
     	
     	  @tasks.each do |t|
-    	    face += ' :: ' + t.name + ' ' + 'http://qq.benerino.com/uqh/' + t.project_id.to_s + '/' + t.id.to_s
+    	    face += '<br />' + t.name + ' ' + 'http://qq.benerino.com/uqh/' + t.project_id.to_s + '/' + t.id.to_s
  	  end
  	 
- 	  current_user.facebook.feed!(:message => @project.name, :name => face)
+ 	  current_user.facebook.feed!(:message => face, :name => @project.name)
   	end
     end
     
